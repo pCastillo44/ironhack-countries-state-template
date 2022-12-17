@@ -1,23 +1,23 @@
-<template>
-  <img src="#" alt="country flag" style="width: 300px" />
-  <h1>Name</h1>
+<template >
+  <img :src="countryStore.country.flag" alt="country flag" />
+  <h1>{{ countryStore.country.name }}</h1>
   <table class="table">
     <thead></thead>
     <tbody>
       <tr>
         <td style="width: 30%">Capital</td>
-        <td>Capital</td>
+        <td>{{ countryStore.country.capital }}</td>
       </tr>
       <tr>
         <td>Area</td>
-        <td>Area km <sup>2</sup></td>
+        <td>{{ countryStore.country.area }} km <sup>2</sup></td>
       </tr>
-      <tr>
+      <tr v-if="countryStore.country.borders !== undefined">
         <td>Borders</td>
         <td>
           <ul>
-            <li>
-              <a href="/">Border</a>
+            <li v-for="border in countryStore.country.borders">
+              <a href="/">{{ border }}</a>
             </li>
           </ul>
         </td>
@@ -26,6 +26,11 @@
   </table>
 </template>
 
-<script setup></script>
+<script setup>
+import { useCountryStore } from "../stores/country.js";
+const countryStore = useCountryStore();
+
+
+</script>
 
 <style></style>
